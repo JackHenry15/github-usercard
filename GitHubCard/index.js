@@ -6,9 +6,11 @@
 axios.get(`https://api.github.com/users/JackHenry15`)
     .then((res) => {
       const userProf = res.data.message;
+      debugger
     })
     .catch((err) => {
       console.log(err, 'this is an error');
+      debugger
     })
     .then(() => {
       console.log('done');
@@ -69,3 +71,28 @@ const followersArray = [];
     luishrd
     bigknell
 */
+
+function cardMaker({obj}){
+    const card = document.createElement('div')
+    const cardImg = document.createElement('img src')
+    const cardInfo = document.createElement('div')
+    const cardName = document.createElement('h3')
+    const cardUsername = document.createElement('p')
+    const cardLocation = document.createElement('p')
+    const cardProfile = document.createElement('p')
+    const cardAddress = document.createElement('a href')
+    const cardFollowers = document.createElement('p')
+    const cardFollowing = document.createElement('p')
+    const cardBio = document.createElement('p')
+
+    card.appendChild(cardImg)
+    card.appendChild(cardInfo)
+    cardInfo.appendChild(cardName)
+    cardInfo.appendChild(cardUsername)
+    cardInfo.appendChild(cardLocation)
+    cardInfo.appendChild(cardProfile)
+    cardProfile.appendChild(cardAddress)
+    cardInfo.appendChild(cardFollowers)
+    cardInfo.appendChild(cardFollowing)
+    cardInfo.appendChild(cardBio)
+}
