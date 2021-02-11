@@ -3,7 +3,18 @@
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios.get(`https://api.github.com/users/JackHenry15`)
+    .then((res) => {
+      const userProf = res.data.message;
+    })
+    .catch((err) => {
+      console.log(err, 'this is an error');
+    })
+    .then(() => {
+      console.log('done');
+    })
 
+console.log(axios);
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -27,7 +38,7 @@
     Using that array, iterate over it, requesting data for each user, creating a new card for each
     user, and adding that card to the DOM.
 */
-
+import axios from 'axios';
 const followersArray = [];
 
 /*
