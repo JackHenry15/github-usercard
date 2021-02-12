@@ -95,4 +95,9 @@ function cardMaker({obj}){
     cardInfo.appendChild(cardFollowers)
     cardInfo.appendChild(cardFollowing)
     cardInfo.appendChild(cardBio)
+
+    card.classList.add('card');
+    cardInfo.classList.add('card-info');
+    cardName.classList.add('name');
+    cardUsername.classList.add('username');
 }
