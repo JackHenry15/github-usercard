@@ -35,33 +35,12 @@ axios.get(`https://api.github.com/users/JackHenry15`)
   .then((res) => {
       const crd = res.data
       entryPoint.appendChild(cardMaker(crd));
-      console.log(entryPoint);
   })
   .catch((err) => {
     console.log( err, 'error boy');
   });
   
-// console.log(cards);
 
-
-
-// axios.get(`https://api.github.com/users/JackHenry15`)
-// .then((res) => {
-//   const userProf = res.data;
-//   userProf.forEach(() => {
-//     const idkWhat = cardMaker({cardImg: avatar_url, cardName: name, cardUsername: login, cardLocation: location, cardAddress: url, cardFollowers: followers, cardFollowing: following, cardBio: bio})
-//     console.log(idkWhat);
-//     card.append(idkWhat);
-//   })
-  
-// })
-// .catch((err) => {
-//   console.log(err, 'this is an error');
-  
-// })
-// .then(() => {
-//   console.log('done');
-// })
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -82,6 +61,16 @@ const followersArray = [
   'bigknell'
 ];
 
+followersArray.forEach(element => {
+axios.get(`https://api.github.com/users/${element}`)
+.then((res) => {
+  const crd1 = res.data
+  entryPoint.appendChild(cardMaker(crd1));
+})
+.catch((err) => {
+  console.log(err, 'Error');
+})
+});
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
     Using DOM methods and properties, create and return the following markup:
@@ -111,7 +100,7 @@ const followersArray = [
     bigknell
 */
 
-function cardMaker({obj}){
+function cardMaker(obj){
     const card = document.createElement('div')
     const cardImg = document.createElement('img')
     const cardInfo = document.createElement('div')
@@ -124,17 +113,16 @@ function cardMaker({obj}){
     const cardFollowing = document.createElement('p')
     const cardBio = document.createElement('p')
 
-    // const idkWhat = cardMaker({cardImg: avatar_url, cardName: name, cardUsername: login, cardLocation: location, cardAddress: url, cardFollowers: followers, cardFollowing: following, cardBio: bio})
 
-    cardImg.src = obj.html_url
+    cardImg.src = obj.avatar_url
     cardName.textContent = obj.name
     cardUsername.textContent = obj.login
-    cardLocation.textContent = obj.location
+    cardLocation.textContent = `Location: ${obj.location}`
     cardFollowers.textContent = `Followers: ${obj.followers}`
     cardFollowing.textContent = `Following: ${obj.following}`
-    cardAddress.href = obj.url
-    cardAddress.textContent = obj.url
-    cardBio.textContent = obj.bio
+    cardAddress.href = obj.html_url
+    cardAddress.textContent = `Profile: ${obj.html_url}`
+    cardBio.textContent = `Bio: ${obj.bio}`
     card.classList.add('card');
     cardInfo.classList.add('card-info');
     cardName.classList.add('name');
