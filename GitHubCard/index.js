@@ -5,18 +5,17 @@
 */
 axios.get(`https://api.github.com/users/JackHenry15`)
     .then((res) => {
-      const userProf = res.data.message;
-      debugger
+      // const userProf = res.data;
+      console.log(res.data);
     })
     .catch((err) => {
       console.log(err, 'this is an error');
-      debugger
+      
     })
     .then(() => {
       console.log('done');
     })
-
-console.log(axios);
+// console.log(axios);
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -30,6 +29,40 @@ console.log(axios);
     and append the returned markup to the DOM as a child of .cards
 */
 
+const entryPoint = document.querySelector('.cards');
+
+axios.get(`https://api.github.com/users/JackHenry15`)
+  .then((res) => {
+      const crd = res.data
+      entryPoint.appendChild(cardMaker(crd));
+      console.log(entryPoint);
+  })
+  .catch((err) => {
+    console.log( err, 'error boy');
+  });
+  
+// console.log(cards);
+
+
+
+// axios.get(`https://api.github.com/users/JackHenry15`)
+// .then((res) => {
+//   const userProf = res.data;
+//   userProf.forEach(() => {
+//     const idkWhat = cardMaker({cardImg: avatar_url, cardName: name, cardUsername: login, cardLocation: location, cardAddress: url, cardFollowers: followers, cardFollowing: following, cardBio: bio})
+//     console.log(idkWhat);
+//     card.append(idkWhat);
+//   })
+  
+// })
+// .catch((err) => {
+//   console.log(err, 'this is an error');
+  
+// })
+// .then(() => {
+//   console.log('done');
+// })
+
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
     follow this link in your browser https://api.github.com/users/<Your github name>/followers,
@@ -41,7 +74,13 @@ console.log(axios);
     user, and adding that card to the DOM.
 */
 import axios from 'axios';
-const followersArray = [];
+const followersArray = [
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -74,16 +113,32 @@ const followersArray = [];
 
 function cardMaker({obj}){
     const card = document.createElement('div')
-    const cardImg = document.createElement('img src')
+    const cardImg = document.createElement('img')
     const cardInfo = document.createElement('div')
     const cardName = document.createElement('h3')
     const cardUsername = document.createElement('p')
     const cardLocation = document.createElement('p')
     const cardProfile = document.createElement('p')
-    const cardAddress = document.createElement('a href')
+    const cardAddress = document.createElement('a')
     const cardFollowers = document.createElement('p')
     const cardFollowing = document.createElement('p')
     const cardBio = document.createElement('p')
+
+    // const idkWhat = cardMaker({cardImg: avatar_url, cardName: name, cardUsername: login, cardLocation: location, cardAddress: url, cardFollowers: followers, cardFollowing: following, cardBio: bio})
+
+    cardImg.src = obj.html_url
+    cardName.textContent = obj.name
+    cardUsername.textContent = obj.login
+    cardLocation.textContent = obj.location
+    cardFollowers.textContent = `Followers: ${obj.followers}`
+    cardFollowing.textContent = `Following: ${obj.following}`
+    cardAddress.href = obj.url
+    cardAddress.textContent = obj.url
+    cardBio.textContent = obj.bio
+    card.classList.add('card');
+    cardInfo.classList.add('card-info');
+    cardName.classList.add('name');
+    cardUsername.classList.add('username');
 
     card.appendChild(cardImg)
     card.appendChild(cardInfo)
@@ -96,8 +151,8 @@ function cardMaker({obj}){
     cardInfo.appendChild(cardFollowing)
     cardInfo.appendChild(cardBio)
 
-    card.classList.add('card');
-    cardInfo.classList.add('card-info');
-    cardName.classList.add('name');
-    cardUsername.classList.add('username');
+    
+
+  return card;
 }
+
